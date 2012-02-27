@@ -1,0 +1,21 @@
+{% for song in songs.object_list %}
+    {# Each "song" is a song model object. #}
+    {{ song.name|upper }}<br />
+    ...
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if songs.has_previous %}
+            <a href="?page={{ songs.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ songs.number }} of {{ songs.paginator.num_pages }}.
+        </span>
+
+        {% if songs.has_next %}
+            <a href="?page={{ songs.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>

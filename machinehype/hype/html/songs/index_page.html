@@ -1,0 +1,12 @@
+{% load endless %}
+{% csrf_token %}
+<h2>Viewing All Entries</h2>
+<div>
+{% paginate entries %}
+{% for entry in entries %}
+    {# your code to show the entry #}
+    New Entry!: {{ entry.name }} <br/>
+{% endfor %}
+{% show_pages %}
+
+</div>

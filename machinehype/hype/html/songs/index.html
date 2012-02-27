@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Machine Hype Music!{% endblock %}
+
+{% block content %}
+<div class="container">
+	<h1>New Songs:</h1>
+	<p>
+		<div class="span8">
+			<ul class="playlist dark">
+				{% for song in songs.object_list %}
+				<p>
+					<li>
+						<a href="{{ song.mp3_url }}">{{ song.name }}: {{ song.likes }} People Like This</a>
+						<p>
+							
+							<form action="/songs/{{ song.id }}/like/" method="post">
+								{% csrf_token %}
+								<input type="submit" value="Like Song" />
+							</form>
+						</p>
+					</li>
+				</p>
+				{% endfor %}
+			</ul>
+			<ul class="pager">
+				<span class="step-links"> 
+					{% if songs.has_previous %} 
+						<a href="?page={{ songs.previous_page_number }}">previous</a> 
+					{% endif %} 
+					<span class="current"> Page {{ songs.number }} of {{ songs.paginator.num_pages }}. </span>
+					{% if songs.has_next %} 
+						<a href="?page={{ songs.next_page_number }}">next</a> 
+					{% endif %} 
+				</span>
+			</div>
+		</div>
+</div>
+<!-- /container -->
+{% endblock content %}
